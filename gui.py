@@ -15,7 +15,7 @@ def makeWindow():
             [sg.Text('Enter distance (miles): ', font=('Futura', 20), key = 'text3')],
             [sg.InputText(font=('Futura 20'), size = (16, 1), key = 'DST')],
             [sg.Text('Enter music genre: ', font=('Futura', 20), key = 'text4')],
-            [sg.Combo(['Happy', 'Moody', 'Calm', 'My Favorites'], font = 'Futura 20', size = (15, 1), enable_events=True,  readonly=True, key='-COMBO3-')],
+            [sg.Combo(['Happy', 'Moody', 'Calm'], font = 'Futura 20', size = (15, 1), enable_events=True,  readonly=True, key='-COMBO3-')],
             [sg.Button('Generate Playlist', font = 'Futura 20', key = 'GEN'), sg.Button('Clear', font = 'Futura 20', key = 'CLR')],
             [sg.Text(font = ('Futura 20'), key = 'INFO')],
             [sg.Button('Give me a shower song!', font = ('Futura 20'), key = 'SHWR')]]
