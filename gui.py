@@ -31,7 +31,7 @@ def makeWindow():
         ]
 
     # Create the Window
-    window = sg.Window('Spotify Playlist Generator', layout, size = (800, 800))
+    window = sg.Window('SustainIfy', layout, size = (800, 800))
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
