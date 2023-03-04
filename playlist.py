@@ -99,7 +99,7 @@ def makePlaylist(activity, intensity, distance, genre):
             songs.append(song)
 
 
-    print("TIME TO FILL: " + str(time))
+    
 
     timePlaylist = 0
     for song in songs:
@@ -108,10 +108,6 @@ def makePlaylist(activity, intensity, distance, genre):
             artists.append(artist['name'])
         
         timePlaylist += song['track']['duration_ms']
-
-        print(song['track']['name'] + " by " + str(artists) + "(Length: " + str(song['track']['duration_ms']))
-
-    print("TIME PLAYLIST: " + str(timePlaylist))
 
     
 

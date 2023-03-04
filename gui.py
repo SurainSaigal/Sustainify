@@ -20,9 +20,9 @@ def makeWindow():
             [sg.Text(font = ('Futura 20'), key = 'INFO')],
             [sg.Button('Give me a shower song!', font = ('Futura 20'), key = 'SHWR')]]
 
-    playlist_column = [[sg.Text(font=('Futura 17'), key = 'TITLE')],
+    playlist_column = [[sg.Text(font=('Futura 20'), key = 'TITLE')],
                        [sg.Multiline(size = (70, 60), key = 'LST', enable_events = True, horizontal_scroll=True, autoscroll = True)],
-                       [sg.Text(font=('Futura 17'), size = (16, None), key = 'DUR')]]
+                       [sg.Text(font=('Futura 20'), size = (16, None), key = 'DUR')]]
 
     layout = [
             [sg.Column(selection_column, size = (300, 800)),
@@ -39,6 +39,7 @@ def makeWindow():
             break
 
         if event == 'SHWR':
+            window['TITLE'].update('Get Scrubbing!')
             window['LST'].update('')
             window['INFO'].update('')
             song = playlist.makeShower()
@@ -51,36 +52,39 @@ def makeWindow():
             toPrintSong = name + " - " + artistStr + '\n'
             infoT = "Duration: " + msToTF(song['track']['duration_ms'])
             window['DUR'].update(infoT)
-            window['LST'].print(toPrintSong, font = 'Futura 14', text_color = 'black')
+            window['LST'].print(toPrintSong, font = 'Futura 16', text_color = 'black')
             window['INFO'].print("Showers should be < 4 minutes")
 
 
         if event == 'GEN':
-            window['LST'].update('')
-            window['INFO'].update('')
-            songs, time, timeO = playlist.makePlaylist(values['-COMBO1-'], values['-COMBO2-'], values['DST'], values['-COMBO3-'])
-            title = values['-COMBO3-'] + " Playlist to " + values['-COMBO1-'] + " to"
-            window['TITLE'].update(title)
+            if(values['-COMBO1-'] == '' or values['-COMBO2-'] == '' or values['DST'] == '' or values['-COMBO3-'] == ''):
+                window['LST'].print("Insufficient data!", font = 'Futura 16', text_color = 'black')
+            else:
+                window['LST'].update('')
+                window['INFO'].update('')
+                songs, time, timeO = playlist.makePlaylist(values['-COMBO1-'], values['-COMBO2-'], values['DST'], values['-COMBO3-'])
+                title = values['-COMBO3-'] + " Playlist to " + values['-COMBO1-'] + " to"
+                window['TITLE'].update(title)
 
-            toPrint = ""
-            for song in songs:
-                artists = song['track']['artists']
-                artistStr = ""
-                for a in artists:
-                    artistStr += a['name'] + ", "
-                artistStr = artistStr[:len(artistStr) - 2]
-                name = "\"" + song['track']['name'] + "\""
-                toPrintSong = name + " - " + artistStr + '\n'
-                toPrint += toPrintSong
-            
-            infoT = "Duration: " + msToTF(time)
-            window['DUR'].update(infoT)
-            window['LST'].print(toPrint, font = 'Futura 14', text_color = 'black')
-            infoP = "You want to " + values['-COMBO1-'].lower() + " for " + values['DST'] + " miles at a " + values['-COMBO2-'].lower() + " pace. " + "This should take you " \
-                    + str(round(timeO//3600000)) + " hour(s) and " + str(round(((timeO%3600000)//60000))) + " minute(s).";
-            infoo = textwrap.wrap(infoP, 30)
-            for s in infoo:
-                window['INFO'].print(s)
+                toPrint = ""
+                for song in songs:
+                    artists = song['track']['artists']
+                    artistStr = ""
+                    for a in artists:
+                        artistStr += a['name'] + ", "
+                    artistStr = artistStr[:len(artistStr) - 2]
+                    name = "\"" + song['track']['name'] + "\""
+                    toPrintSong = name + " - " + artistStr + '\n'
+                    toPrint += toPrintSong
+                
+                infoT = "Duration: " + msToTF(time)
+                window['DUR'].update(infoT)
+                window['LST'].print(toPrint, font = 'Futura 16', text_color = 'black')
+                infoP = "You want to " + values['-COMBO1-'].lower() + " for " + values['DST'] + " miles at a " + values['-COMBO2-'].lower() + " pace. " + "This should take you " \
+                        + str(round(timeO//3600000)) + " hour(s) and " + str(round(((timeO%3600000)//60000))) + " minute(s).";
+                infoo = textwrap.wrap(infoP, 30)
+                for s in infoo:
+                    window['INFO'].print(s)
 
         if event == 'CLR':
             window['LST'].update('')
