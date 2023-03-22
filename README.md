@@ -1,4 +1,4 @@
-# HackTheFutureSustainify
+# Sustainify
 HackTheFuture 2023
 
 
