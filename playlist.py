@@ -4,7 +4,7 @@ import json
 import random
 
 # generate auth_token at https://developer.spotify.com/console/get-playlist-tracks/?playlist_id=&market=&fields=&limit=&offset=&additional_types=
-auth_token = 'BQDOe3iXFjXW212Uw01yKXBigX__Hr2cjJpIwgOj0uTKgSNcmT0OjYXrP_8DGSHagUQHJVBlPKIcUWpihoHYbYNDGX8lCEqHc0f77QyewEZDtQ0kNi3vfK7TeJsHgMdQF_GMKdYY2-tFHr24bg1T5EzeQNd-LAHW2e2rsTaFwREwKpXKBRnRthum9ZtAKTN_708qVVTydvi9UrZLqQ'
+auth_token = 'REPLACE ME WITH AUTH TOKEN'
 def getTimeMS(activity, intensity, distance):
     d = float(distance)
     if activity == 'Bike':
