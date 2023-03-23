@@ -1,7 +1,8 @@
 # Sustainify
 HackTheFuture 2023
 
+To run the tool, clone this repo and run "pip3 install -r requirements.txt" or "pip install -r requirements.txt".
 
-Run gui.py to launch the tool
+Then, replace the auth_token variable at the top of playlist.py to a valid auth token, which can be generated at https://developer.spotify.com/console/get-playlist-tracks/
 
-AUTH_TOKEN must represent valid Spotify Auth_Token, which can be generated at https://developer.spotify.com/console/get-playlist-tracks/
+Then, run gui.py.
