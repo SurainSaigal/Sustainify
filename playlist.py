@@ -3,7 +3,8 @@ import requests
 import json
 import random
 
-auth_token = 'BQAACdiqnu5IGcNz8YSIbZtjxFzvC62mesmfxEqb6qnAub7NRKsTvicF2foFu7ayWfs4P_AupjakjhBJOMzioTEfv2Ol4zak3XHuVPDkWsAQomyYtieI-X9Q8JHBy1Onf_YxF-kaMdpVjCvhcycoP-8BckLSbLUesUIp_XclkaaKO4kGPBvoIw15ZFmKlPNkd-5pLj95qscHwVhiBA'
+# generate auth_token at https://developer.spotify.com/console/get-playlist-tracks/?playlist_id=&market=&fields=&limit=&offset=&additional_types=
+auth_token = 'BQDOe3iXFjXW212Uw01yKXBigX__Hr2cjJpIwgOj0uTKgSNcmT0OjYXrP_8DGSHagUQHJVBlPKIcUWpihoHYbYNDGX8lCEqHc0f77QyewEZDtQ0kNi3vfK7TeJsHgMdQF_GMKdYY2-tFHr24bg1T5EzeQNd-LAHW2e2rsTaFwREwKpXKBRnRthum9ZtAKTN_708qVVTydvi9UrZLqQ'
 def getTimeMS(activity, intensity, distance):
     d = float(distance)
     if activity == 'Bike':

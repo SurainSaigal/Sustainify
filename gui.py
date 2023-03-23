@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 import playlist
 import textwrap
-from datetime import datetime
 
 def makeWindow():
     sg.theme('Dark Teal 2')
@@ -21,8 +20,9 @@ def makeWindow():
             [sg.Button('Give me a shower song!', font = ('Futura 20'), key = 'SHWR')]]
 
     playlist_column = [[sg.Text(font=('Futura 20'), key = 'TITLE')],
-                       [sg.Multiline(size = (70, 60), key = 'LST', enable_events = True, horizontal_scroll=True, autoscroll = True)],
-                       [sg.Text(font=('Futura 20'), size = (16, None), key = 'DUR')]]
+                       [sg.Multiline(size = (70, 57), key = 'LST', enable_events = True, horizontal_scroll=True, autoscroll = True)],
+                       [sg.Text(font=('Futura 20'), size = (16, None), key = 'DUR')],
+                       [sg.Button('Add playlist to Spotify', key = 'IMP', font = 'Futura 20', button_color='green', visible = False)]]
 
     layout = [
             [sg.Column(selection_column, size = (300, 800)),
@@ -31,7 +31,7 @@ def makeWindow():
         ]
 
     # Create the Window
-    window = sg.Window('SustainIfy', layout, size = (800, 800))
+    window = sg.Window('Sustainify', layout, size = (800, 800))
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
@@ -60,6 +60,7 @@ def makeWindow():
             if(values['-COMBO1-'] == '' or values['-COMBO2-'] == '' or values['DST'] == '' or values['-COMBO3-'] == ''):
                 window['LST'].print("Insufficient data!", font = 'Futura 16', text_color = 'black')
             else:
+                window['IMP'].update(visible = True)
                 window['LST'].update('')
                 window['INFO'].update('')
                 songs, time, timeO = playlist.makePlaylist(values['-COMBO1-'], values['-COMBO2-'], values['DST'], values['-COMBO3-'])
@@ -85,8 +86,12 @@ def makeWindow():
                 infoo = textwrap.wrap(infoP, 30)
                 for s in infoo:
                     window['INFO'].print(s)
+                
+        if event == 'IMP':
+            importToSpotify()
 
         if event == 'CLR':
+            window['IMP'].update(visible = False)
             window['LST'].update('')
             window['TITLE'].update('')
             window['-COMBO1-'].update('')
@@ -110,10 +115,19 @@ def msToTF(time):
     timeFormatted = str(round(time//3600000)) + ':' + min + ':' + sec
     return timeFormatted
 
+def importToSpotify():
+    layout = [[sg.InputText('Enter Playlist Name', font=('Futura 15'), size = (16, 1), key = 'DST')]]
+    window = sg.Window('Import', layout, size = (200, 200))
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+            break
+
+
+
+
 def main():
     makeWindow()
-
-
 
 if __name__ == "__main__":
     main()
